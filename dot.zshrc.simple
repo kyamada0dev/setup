@@ -1,0 +1,65 @@
+##########################################################################
+autoload -U promptinit; promptinit
+
+local -A schars
+autoload -Uz prompt_special_chars
+prompt_special_chars
+
+PROMPT=" %n@%m:%~ %# "
+
+##########################################################################
+LANG=ja_JP.UTF-8; export LANG
+LC_TIME=C; export LC_TIME
+BLOCKSIZE=1024; export BLOCKSIZE
+LS_BLOCK_SIZE=k; export LS_BLOCK_SIZE
+JLESSCHARSET=japanese; export JLESSCHARSET
+LESS="-rX"; export LESS
+
+##########################################################################
+HISTFILE=$HOME/.zsh_history; export HISTFILE
+HISTSIZE=1000; export HISTSIZE
+SAVEHIST=1000; export SAVEHIST
+setopt inc_append_history
+setopt extended_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_save_no_dups
+setopt sharehistory
+setopt no_hist_beep
+
+##########################################################################
+cdpath=(. ~)
+
+##########################################################################
+autoload -U compinit
+compinit
+compctl -g '*(/)' cd chdir pushd dirs
+
+##########################################################################
+if type vim >/dev/null 2>&1; then
+  alias vi=vim
+fi
+
+alias cp='nocorrect cp -i'
+if type ggrep >/dev/null 2>&1; then
+  alias grep="ggrep --color"
+else
+  alias grep="grep --color"
+fi
+alias h='fc -l -i -45'
+alias history='fc -l -45'
+alias ls='ls -F'
+alias mv='nocorrect mv -i'
+alias rm='rm -i'
+alias sudo='sudo -H'
+alias tmux="tmux -2"
+
+##########################################################################
+if [[ -s $HOME/.zshrc.local ]]; then source $HOME/.zshrc.local; fi
+
+HOSTNAME=$(hostname)
+if [[ -s $HOME/dotfiles/dot.zshrc.$HOSTNAME ]]; then
+  source $HOME/dotfiles/dot.zshrc.$HOSTNAME
+fi
+
+# vim: ft=sh foldmethod=marker
