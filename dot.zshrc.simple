@@ -36,6 +36,10 @@ compinit
 compctl -g '*(/)' cd chdir pushd dirs
 
 ##########################################################################
+FZF_KEY="/usr/share/doc/fzf/examples/key-bindings.zsh"
+[[ -e "${FZF_KEY}" ]] && source "${FZF_KEY}"
+
+##########################################################################
 if type vim >/dev/null 2>&1; then
   alias vi=vim
 fi
