@@ -6,6 +6,14 @@ autoload -Uz prompt_special_chars
 prompt_special_chars
 
 PROMPT=" %n@%m:%~ %# "
+PATH=$PATH:$HOME/.local/bin
+
+##########################################################################
+if (( $+commands[mise] )); then
+  # curl https://mise.run | sh
+  eval "$(mise activate zsh)"
+  eval "$(mise completion zsh)"
+fi
 
 ##########################################################################
 LANG=ja_JP.UTF-8; export LANG
