@@ -9,6 +9,11 @@ PROMPT=" %n@%m:%~ %# "
 PATH=$PATH:$HOME/.local/bin
 
 ##########################################################################
+autoload -U compinit
+compinit
+compctl -g '*(/)' cd chdir pushd dirs
+
+##########################################################################
 if (( $+commands[mise] )); then
   # curl https://mise.run | sh
   eval "$(mise activate zsh)"
@@ -37,11 +42,6 @@ setopt no_hist_beep
 
 ##########################################################################
 cdpath=(. ~)
-
-##########################################################################
-autoload -U compinit
-compinit
-compctl -g '*(/)' cd chdir pushd dirs
 
 ##########################################################################
 FZF_KEY="/usr/share/doc/fzf/examples/key-bindings.zsh"
