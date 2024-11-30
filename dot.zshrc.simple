@@ -45,6 +45,7 @@ cdpath=(. ~)
 
 ##########################################################################
 FZF_KEY="/usr/share/doc/fzf/examples/key-bindings.zsh"
+#FZF_KEY="$HOME/.fzf/shell/key-bindings.zsh"
 [[ -e "${FZF_KEY}" ]] && source "${FZF_KEY}"
 
 ##########################################################################
