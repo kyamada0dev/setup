@@ -10,7 +10,8 @@ echo 'Install required packages'
 sudo apt-get install -y \
   zsh \
   fzf \
-  tmux
+  tmux \
+  openssh-client
 
 echo 'change shell from bash to zsh'
 sudo chsh -s /bin/zsh $USER
