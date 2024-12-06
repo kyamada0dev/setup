@@ -17,6 +17,7 @@ echo 'change shell from bash to zsh'
 sudo chsh -s /bin/zsh $USER
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.zshrc.simple >"$HOME/.zshrc"
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.tmux.conf >"$HOME/.tmux.conf"
+curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.vimrc.simple >"$HOME/.vimrc"
 
 echo 'config env'
 sudo mv /etc/locale.gen /etc/locale.gen.orig
