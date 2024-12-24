@@ -41,7 +41,7 @@ fi
 echo 'Install mise'
 curl https://mise.run | sh
 
-echo 'Install build dependencies for ruby'
+echo 'Install build dependencies for rust and ruby'
 sudo apt install -y build-essential rustc libssl-dev libyaml-dev zlib1g-dev libgmp-dev sqlite3 libsqlite3-dev
 
 echo 'Setup docker'
@@ -63,3 +63,4 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose
 
 sudo usermod -aG docker "$USER"
+echo 'exec "newgrp docker"'
