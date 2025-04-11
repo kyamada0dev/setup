@@ -13,6 +13,8 @@ autoload -U compinit
 compinit
 compctl -g '*(/)' cd chdir pushd dirs
 
+fpath=(/home/linuxbrew/.linuxbrew/share/zsh/site-functions(N-/) /usr/local/share/zsh/site-functions(N-/) /usr/share/zsh/vendor-completions(N-/) $fpath)
+
 ##########################################################################
 if (( $+commands[mise] )); then
   # curl https://mise.run | sh
