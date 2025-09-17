@@ -64,6 +64,56 @@ setopt no_hist_beep
 cdpath=(. ~)
 
 ##########################################################################
+setopt prompt_subst #プロンプト表示する度に変数を展開
+
+gitinfo() {
+  # Git 管理されているか確認
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    export BRANCH_NAME=""
+    export GIT_COLOR="%f"
+    return
+  fi
+
+  # 現在の branch 名
+  export BRANCH_NAME=$(git branch --show-current 2>/dev/null)
+
+  # 差分の状態を確認
+  if ! git diff --quiet 2>/dev/null; then
+    # ワークツリーに未ステージ差分あり
+    export GIT_COLOR="%B%F{208}"  # 黄: unstaged が一つでもある
+  elif ! git diff --cached --quiet 2>/dev/null; then
+    # staged のみ差分あり
+    export GIT_COLOR="%F{yellow}"   # 緑: staged only
+  else
+    # 差分なし
+    export GIT_COLOR="%F{green}"          # デフォルト色
+  fi
+}
+
+precmd () {
+  if [ -n "$(git status --short 2>/dev/null)" ];then
+    export GIT_HAS_DIFF="✗"
+    export GIT_NON_DIFF=""
+  else
+    export GIT_HAS_DIFF=""
+    export GIT_NON_DIFF="✔"
+  fi
+  # git管理されているか確認
+  git status --porcelain >/dev/null 2>&1
+  if [ $? -ne 0 ];then
+    export GIT_HAS_DIFF=""
+    export GIT_NON_DIFF=""
+  fi
+  export BRANCH_NAME=$(git branch --show-current 2>/dev/null)
+}
+# 末尾に空白をつけることで改行される
+PROMPT="
+%F{cyan}%n@btob2-dev:%f %B%F{216}%~%f%b"
+PROMPT=${PROMPT}'%F{green}  ${BRANCH_NAME} ${GIT_NON_DIFF}%F{red}${GIT_HAS_DIFF}
+%f$ '
+
+##########################################################################
 FZF_KEY="/usr/share/doc/fzf/examples/key-bindings.zsh"
 #FZF_KEY="$HOME/.fzf/shell/key-bindings.zsh"
 [[ -e "${FZF_KEY}" ]] && source "${FZF_KEY}"
