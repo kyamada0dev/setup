@@ -30,13 +30,13 @@ packages:
 - keychain
 - libffi-dev
 - libgmp-dev
+- liblzma-dev
 - libncurses5-dev
 - libsqlite3-dev
 - libssl-dev
 - libyaml-dev
 - libxml2-dev
 - libxmlsec1-dev
-- libzma-dev
 - llvm
 - make
 - openssh-client
