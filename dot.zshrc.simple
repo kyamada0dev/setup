@@ -6,7 +6,7 @@ autoload -Uz prompt_special_chars
 prompt_special_chars
 
 PROMPT="%n@%m:%~ %# "
-PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin
+PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin:$PATH
 [ -d /home/linuxbrew/.linuxbrew ] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 ##########################################################################
@@ -109,7 +109,7 @@ precmd () {
 }
 # 末尾に空白をつけることで改行される
 PROMPT="
-%F{cyan}%n@btob2-dev:%f %B%F{216}%~%f%b"
+%F{cyan}%n@%m:%f %B%F{216}%~%f%b"
 PROMPT=${PROMPT}'%F{green}  ${BRANCH_NAME} ${GIT_NON_DIFF}%F{red}${GIT_HAS_DIFF}
 %f$ '
 
@@ -122,6 +122,7 @@ FZF_KEY="/usr/share/doc/fzf/examples/key-bindings.zsh"
 if type vim >/dev/null 2>&1; then
   alias vi=vim
 fi
+alias vi='env NVIM_APPNAME=kickstart.nvim nvim'
 
 alias cp='nocorrect cp -i'
 if type ggrep >/dev/null 2>&1; then
