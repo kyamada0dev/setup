@@ -13,27 +13,32 @@ sudo /usr/bin/python3 -c "from softwareproperties.SoftwareProperties import Soft
   && sudo apt-get update -y
 
 if [ -e ubuntu-package.txt ]; then
-  cat ubuntu-package.txt | xargs apt install -y
+  cat ubuntu-package.txt | xargs sudo apt install -y
 fi
 
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.zshrc.simple >"$HOME/.zshrc"
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.tmux.conf >"$HOME/.tmux.conf"
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.vimrc.simple >"$HOME/.vimrc"
 
- update-alternatives --set editor "$(command -v vim.basic)"
+update-alternatives --set editor "$(command -v vim.basic)"
+
+mkdir -p $HOME/bin
+mkdir -p $HOME/tmp
 
 # zsh wsl-copy-sshkeys.sh
 
 echo 'Install mise'
 curl https://mise.run | MISE_INSTALL_PATH=$HOME/bin/mise sh
 
-eval "$(/home/kyamada/bin/mise activate zsh)"
+eval "$($HOME/bin/mise activate zsh)"
 mise doctor
 mise install node@22
+mise install deno@latest
 mise install python@latest
 mise install ruby@latest
 
 mise use -g node@22
+mise use -g deno@latest
 mise use -g python@latest
 mise use -g ruby@latest
 
@@ -52,9 +57,6 @@ env NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.co
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # zsh setup-docker-ubuntu.sh
-
-mkdir -p $HOME/bin
-mkdir -p $HOME/tmp
 
 #git clone git@bitbucket.org:melito/dotfiles.git $HOME/dotfiles
 #sh $HOME/dotfiles/setup.sh

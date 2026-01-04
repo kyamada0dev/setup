@@ -28,6 +28,7 @@ packages:
 - gnupg
 - jq
 - keychain
+- libclang-dev
 - libffi-dev
 - libgmp-dev
 - liblzma-dev
@@ -38,6 +39,7 @@ packages:
 - libxml2-dev
 - libxmlsec1-dev
 - llvm
+- llvm-dev
 - make
 - openssh-client
 - pkg-config
