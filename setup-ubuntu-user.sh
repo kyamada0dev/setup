@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-#  awk '/^packages:/{flag=1; next} flag && /^\-/{print; if ($0 !~ /^\-/) flag=0}' ubuntu-devuser.user-data | sed -e 's/^- //' >ubuntu-package.txt 
+#  awk '/^packages:/{flag=1; next} flag && /^\-/{print; if ($0 !~ /^\-/) flag=0}' ubuntu-dev.user-data | sed -e 's/^- //' >ubuntu-package.txt 
 #
 
-echo 'Start setup script for Ubuntu 24.04'
+echo 'Start setup script for Ubuntu'
 
 echo 'Update all packages'
 sudo apt-get update -y
@@ -20,7 +20,7 @@ curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.zshrc.simp
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.tmux.conf >"$HOME/.tmux.conf"
 curl -sL https://raw.githubusercontent.com/kyamada0dev/setup/main/dot.vimrc.simple >"$HOME/.vimrc"
 
-update-alternatives --set editor "$(command -v vim.basic)"
+sudo update-alternatives --set editor "$(command -v vim.basic)"
 
 mkdir -p $HOME/bin
 mkdir -p $HOME/tmp
@@ -70,4 +70,7 @@ cargo install sheldon cargo-update zoxide
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 echo GIT_SSH_COMMAND=\'ssh -o StrictHostKeyChecking=no\' git clone --branch personal-use git@github.com:melito00/kickstart.nvim.git $HOME/.config/kickstart.nvim
+
+brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask font-material-icons
 

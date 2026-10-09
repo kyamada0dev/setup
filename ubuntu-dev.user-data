@@ -1,10 +1,18 @@
 #cloud-config
-# %USERPROFILE%\.cloud-init\ubuntu-devuser.user-data
-# wsl --install -d Ubuntu-24.04 --name ubuntu-devuser
+# %USERPROFILE%\.cloud-init\ubuntu-dev.user-data
+# # wsl --install -d Ubuntu-26.04 --name ubuntu-dev
+# wsl.exe --install --distribution Ubuntu-26.04 --no-launch --name ubuntu-dev
+# wsl.exe -d ubuntu-dev -u root exec cloud-init status --wait --format json
+
+package_update: true
+package_upgrade: true
+
+timezone: Asia/Tokyo
 
 locale: ja_JP.UTF-8
+
 users:
-- name: devuser
+- name: kyamada
   groups: users,sudo,netdev,audio,adm
   sudo: ALL=(ALL) NOPASSWD:ALL
   shell: /bin/zsh
@@ -15,7 +23,7 @@ write_files:
   append: true
   content: |
     [user]
-    default=devuser
+    default=kyamada
 
 packages:
 - 7zip
@@ -32,7 +40,7 @@ packages:
 - libffi-dev
 - libgmp-dev
 - liblzma-dev
-- libncurses5-dev
+- libncurses-dev
 - libsqlite3-dev
 - libssl-dev
 - libyaml-dev
@@ -44,6 +52,7 @@ packages:
 - openssh-client
 - pkg-config
 - procps
+- ripgrep
 - rustc
 - sqlite3
 - tk-dev
@@ -51,7 +60,6 @@ packages:
 - unzip
 - vim
 - wget
-- wslu
 - zlib1g-dev
 - zsh
 - xz-utils
